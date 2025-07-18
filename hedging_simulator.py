@@ -11,9 +11,6 @@ Hedging Simulator
 Portfolio Replication of a Call Option via Delta Hedging
 """
 
-!pip install -q streamlit # installs streamlit for every run (runs in quiet mode due to -q (specifically for pip), will still show errors)
-!npm install -g localtunnel # installs localtunnel globally for every run (with complete silencing due to /dev/null, works regardless of program)
-
 # Commented out IPython magic to ensure Python compatibility.
 # # saves app into .py file that Colab can run on Streamlit
 # %%writefile delta_hedging_app.py
@@ -140,17 +137,3 @@ Portfolio Replication of a Call Option via Delta Hedging
 #     else:
 #         st.error("Please fill in all the required fields. The start date also has to be before the end date.")
 # 
-#
-
-import urllib.request
-import time
-import threading
-
-print("IP:",urllib.request.urlopen('https://ipv4.icanhazip.com').read().decode('utf8').strip("\n")) # IP password
-
-def run_streamlit(): # function to run streamlit
-    !streamlit run delta_hedging_app.py &
-
-threading.Thread(target=run_streamlit).start() # streamlit is run in a new app so that localtunnel won't get stuck
-time.sleep(5) # delay execution to give streamlit time to fully launch before being fully exposed
-!npx localtunnel --port 8501 --subdomain=deltahedging # local tunnelling
